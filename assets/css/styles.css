@@ -544,3 +544,12 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13px}
   .ext-desktop-note{display:flex;gap:10px;padding:11px 14px;border-radius:var(--r-sm);background:var(--info-soft);color:var(--text-2);font-size:12.5px;margin-bottom:18px;align-items:flex-start}
   .ext-desktop-note .ic{flex:none;margin-top:1px;color:var(--info)}
 }
+
+/* ---------- Landing nav on small screens ---------- */
+@media (max-width:960px){
+  .land-nav{padding:0 16px;gap:10px}
+}
+@media (max-width:520px){
+  .land-nav .btn-ghost{display:none}
+  .land-nav .btn-sm{padding:0 10px;font-size:12px}
+}
