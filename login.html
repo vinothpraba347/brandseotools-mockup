@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="login">
+<div class="auth">
+  <div class="auth-side">
+    <div class="brandmark"><span class="sb-logo">B</span><span style="font-weight:600;font-size:15px">BrandSeoTools</span></div>
+    <h1>Every premium tool you need, for a few rupees a month.</h1>
+    <p class="lede">SEO suites, AI writers, design libraries and learning platforms — 87 tools under one member account, renewed on your terms.</p>
+    <div class="auth-points">
+      <div class="auth-pt"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>87 tools, one login.</b> Semrush, ChatGPT, Canva, Udemy, Envato and more.</span></div>
+      <div class="auth-pt"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>30-day terms, no lock-in.</b> Renew only what you actually use.</span></div>
+      <div class="auth-pt"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Browser extension access.</b> One click signs you into shared workspaces.</span></div>
+    </div>
+  </div>
+  <div class="auth-main">
+    <div class="auth-card">
+      <h2>Sign in</h2>
+      <p class="sub">Welcome back. Enter your details to continue.</p>
+      <form class="auth-form" id="login-form" novalidate>
+        <div class="auth-error" id="login-err">Check the highlighted fields and try again.</div>
+        <div class="field"><label for="login-email">Email</label><input id="login-email" type="email" placeholder="you@example.com" autocomplete="email" autofocus><div class="err">Enter a valid email address</div></div>
+        <div class="field"><label for="login-pw">Password</label>
+          <div class="pw-wrap"><input id="login-pw" type="password" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="eye" id="pw-eye" aria-label="Show password"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          </div><div class="err">Minimum 6 characters</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <label class="check"><input type="checkbox" checked>Remember me</label>
+          <a class="small" href="forgot-password.html">Forgot password?</a>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" id="login-btn" type="submit">Sign in</button>
+      </form>
+      <p class="auth-foot">New here? <a href="signup.html">Create an account</a></p>
+      <div class="demo-note"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>Prototype — any email + a 6-character password signs you in.</span></div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

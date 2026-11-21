@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payment History — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="billing" data-title="Payment History">
+<main id="page">
+  <div class="page-head">
+    <div><h1>Payment History</h1><p class="sub">Receipts and invoices for every purchase on this account.</p></div>
+    <div class="page-head-actions"><a class="btn btn-secondary" href="support.html">Billing help</a></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="bq" type="search" placeholder="Search invoice, item, method…" aria-label="Search transactions"></div>
+    <select class="select" id="bstatus" aria-label="Filter by status">
+      <option value="all">All statuses</option>
+      <option value="completed">Completed</option>
+      <option value="failed">Failed</option>
+      <option value="refunded">Refunded</option>
+    </select>
+  </div>
+
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Invoice</th><th>Date</th><th>Item</th><th>Method</th><th class="r">Amount</th><th>Status</th><th></th></tr></thead>
+    <tbody id="txn-body"></tbody>
+  </table></div>
+
+  <p class="xs faint" style="margin-top:14px">Need a GST invoice or a correction? Message support with your invoice number.</p>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

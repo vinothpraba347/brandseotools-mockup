@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tool — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="details" data-title="Tool Details">
+<main id="page">
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="products.html">Tool Catalogue</a>
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="cur" id="pd-crumb-cur"></span>
+  </nav>
+
+  <div class="pd-head">
+    <span class="picon" id="pd-icon"></span>
+    <div>
+      <h1 id="pd-name"></h1>
+      <div class="meta" id="pd-meta"></div>
+    </div>
+    <span class="spacer"></span>
+    <button class="prod-fav" id="fav-btn" aria-label="Save to favorites"><svg class="ic ic-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+    <span id="pd-status"></span>
+  </div>
+
+  <div class="grid-23">
+    <div>
+      <div class="card section">
+        <div class="card-pad">
+          <h3 style="margin-bottom:8px">About this tool</h3>
+          <p class="muted small" id="pd-desc" style="line-height:1.6"></p>
+          <hr class="hr">
+          <h3 style="margin-bottom:10px">How access works</h3>
+          <div class="steps">
+            <div class="step"><span class="n">1</span><div><b>Install the extension</b><p>The BrandSeoTools Chrome extension signs you into our shared workspace. One-time setup.</p></div></div>
+            <div class="step"><span class="n">2</span><div><b>Open the tool page</b><p>Come back to this page — the extension detects your active subscription automatically.</p></div></div>
+            <div class="step"><span class="n">3</span><div><b>Click Access</b><p>You’re signed in and redirected to the tool. Sessions are single-seat — one device at a time.</p></div></div>
+          </div>
+          <div class="howto-note">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <p>Never share your session or run the tool on two devices at once — it triggers automatic suspension. Need help? <a href="support.html">Contact support</a>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card section">
+        <div class="card-head"><h3>Similar tools</h3><a class="link" href="products.html">View all</a></div>
+        <div id="pd-related"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card section"><div class="card-pad" id="access-panel"></div></div>
+      <div class="card section">
+        <div class="card-pad">
+          <h3 style="margin-bottom:10px;font-size:13.5px">Before you access</h3>
+          <ul class="req-list">
+            <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Chrome, Edge or Brave — version 110+</li>
+            <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Extension v3.0.1 or newer</li>
+            <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Single device per subscription</li>
+            <li><a class="small" href="extension.html" style="margin-left:24px">Install or update the extension</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

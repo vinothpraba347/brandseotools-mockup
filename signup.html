@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Choose your tools — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="signup">
+<main class="main" style="min-height:100vh">
+    <header class="topbar" style="position:static">
+      <span class="sb-logo">B</span><span style="font-weight:600">BrandSeoTools</span>
+      <span style="flex:1"></span>
+      <a class="btn btn-ghost btn-sm" href="login.html">Already a member? Sign in</a>
+    </header>
+    <div class="content" id="checkout-view" style="max-width:1080px">
+      <div class="steps-bar">
+        <div class="stp on"><span class="dot"></span><span>Account</span></div>
+        <div class="stp"><span class="dot"></span><span>Choose tools</span></div>
+        <div class="stp"><span class="dot"></span><span>Review & pay</span></div>
+      </div>
+
+      <!-- STEP 1: account -->
+      <div id="step-1">
+        <div class="signup-layout">
+          <div class="card"><div class="card-pad">
+            <h3 style="margin-bottom:4px">Create your account</h3>
+            <p class="small muted" style="margin-bottom:18px">One account unlocks the whole catalogue. Takes about a minute.</p>
+            <form id="su-form" novalidate>
+              <div class="form-row">
+                <div class="field"><label for="su-name">Full name <span class="req">*</span></label><input id="su-name" type="text" placeholder="Rahul Sharma" autocomplete="name" required><div class="err">Enter your name</div></div>
+                <div class="field"><label for="su-email">Email <span class="req">*</span></label><input id="su-email" type="email" placeholder="you@example.com" autocomplete="email" required><div class="err">Enter a valid email</div></div>
+              </div>
+              <div class="form-row">
+                <div class="field"><label for="su-pass">Password <span class="req">*</span></label><input id="su-pass" type="password" placeholder="Min. 8 characters" autocomplete="new-password" required><div class="err">Minimum 8 characters</div></div>
+                <div class="field"><label for="su-phone">Phone (WhatsApp) <span class="req">*</span></label><input id="su-phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required><div class="err">Required for support & verification</div></div>
+              </div>
+              <label class="check" style="margin:4px 0 18px"><input type="checkbox" required>I agree to the terms — single-seat access, no credential sharing.</label>
+              <button class="btn btn-primary btn-lg" type="submit">Continue → Choose tools</button>
+            </form>
+          </div></div>
+          <div class="card"><div class="card-pad">
+            <h3 style="margin-bottom:10px;font-size:14px">Why members join</h3>
+            <ul class="req-list">
+              <li>87 premium tools — ₹99–₹849/mo each</li>
+              <li>30-day terms, renew only what you use</li>
+              <li>Browser extension = one-click access</li>
+              <li>WhatsApp support, replies in ~1 hour</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- STEP 2: choose tools -->
+      <div id="step-2" style="display:none">
+        <div class="page-head" style="margin-bottom:14px"><div><h1 style="font-size:19px">Choose your tools</h1><p class="sub">Pick as many as you like — each is a separate 30-day subscription. You can add or drop tools anytime.</p></div>
+        <span class="badge b-accent" id="pick-count">0 selected</span></div>
+        <div class="signup-layout">
+          <div>
+            <div class="toolbar" style="margin-bottom:12px">
+              <div class="search"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="su-q" type="search" placeholder="Search 87 tools…" aria-label="Search tools"></div>
+            </div>
+            <div class="chip-row" id="su-chips" style="margin-bottom:14px"></div>
+            <div class="pick-grid" id="pick-grid"></div>
+          </div>
+          <div class="card summary"><div class="card-pad">
+            <h3 style="margin-bottom:6px;font-size:14px">Your order</h3>
+            <div id="sum-items"></div>
+            <div class="sum-line"><span>Subtotal</span><span class="tnum" id="sum-sub">₹0</span></div>
+            <div class="sum-line" id="sum-disc-row" style="display:none;color:var(--success)"><span>Coupon</span><span id="sum-disc"></span></div>
+            <div class="sum-line total"><span>Due today</span><span id="sum-total">₹0</span></div>
+            <form id="coupon-form" style="display:flex;gap:8px;margin-top:12px">
+              <input class="input" id="coupon" placeholder="Coupon code" style="height:32px" aria-label="Coupon code">
+              <button class="btn btn-secondary btn-sm" type="submit">Apply</button>
+            </form>
+            <div class="xs" id="coupon-msg" style="margin-top:6px;min-height:14px"></div>
+            <p class="xs faint" style="margin-top:8px">Demo coupon: <b>SAVE10</b></p>
+            <div style="display:flex;gap:8px;margin-top:14px">
+              <button class="btn btn-ghost btn-sm" id="back-2">← Back</button>
+              <button class="btn btn-primary" id="to-step3" style="flex:1" disabled>Review order →</button>
+            </div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- STEP 3: review & pay -->
+      <div id="step-3" style="display:none">
+        <div class="signup-layout">
+          <div>
+            <div class="card section"><div class="card-pad">
+              <h3 style="margin-bottom:8px">Payment method</h3>
+              <p class="small muted" style="margin-bottom:14px">Simulated checkout — no real charge is made.</p>
+              <label class="payopt sel"><input type="radio" name="pay" checked><span><b>UPI</b><span>GPay, PhonePe, Paytm — instant confirmation</span></span></label>
+              <label class="payopt"><input type="radio" name="pay"><span><b>Card</b><span>Visa, Mastercard, RuPay via Razorpay</span></span></label>
+              <label class="payopt"><input type="radio" name="pay"><span><b>PayPal</b><span>International cards & PayPal balance</span></span></label>
+            </div></div>
+            <div class="card"><div class="card-pad">
+              <h3 style="margin-bottom:10px">Order details</h3>
+              <div id="sum-review"></div>
+            </div></div>
+          </div>
+          <div class="card summary"><div class="card-pad">
+            <div class="sum-line"><span>Subtotal</span><span class="tnum" id="sum-sub2">—</span></div>
+            <div class="sum-line total"><span>Due today</span><span id="sum-total2">—</span></div>
+            <button class="btn btn-primary btn-lg btn-block" id="pay-btn" style="margin-top:12px">Pay securely</button>
+            <p class="xs faint" style="margin-top:10px;text-align:center">All tools renew manually every 30 days.<br>No auto-billing, cancel anytime.</p>
+            <div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-ghost btn-sm" id="back-3">← Back to tools</button></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- success -->
+    <div class="content" id="success-view" style="display:none;max-width:520px;text-align:center;padding-top:80px">
+      <span class="eic" style="width:52px;height:52px;border-radius:14px;background:var(--success-soft);color:var(--success);display:grid;place-items:center;margin:0 auto 16px">
+        <svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <h1 style="font-size:22px;margin-bottom:6px">You’re in.</h1>
+      <p class="muted" style="margin-bottom:24px">Your tools are ready. Install the extension to access them in one click, or open the dashboard to start now.</p>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <a class="btn btn-secondary" href="extension.html">Install extension</a>
+        <a class="btn btn-primary" href="dashboard.html">Go to dashboard</a>
+      </div>
+    </div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

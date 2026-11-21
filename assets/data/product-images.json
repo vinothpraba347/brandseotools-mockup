@@ -1,0 +1,524 @@
+{
+  "semrush": {
+    "file": "semrush.svg",
+    "source": "simpleicons.org/semrush",
+    "status": "logo-svg",
+    "domain": "semrush.com"
+  },
+  "moz-pro": {
+    "file": "moz-pro.png",
+    "source": "icon.horse:moz.com",
+    "status": "favicon",
+    "domain": "moz.com"
+  },
+  "ubersuggest": {
+    "file": "ubersuggest.png",
+    "source": "icon.horse:ubersuggest.com",
+    "status": "favicon",
+    "domain": "ubersuggest.com"
+  },
+  "vidiq": {
+    "file": "vidiq.png",
+    "source": "icon.horse:vidiq.com",
+    "status": "favicon",
+    "domain": "vidiq.com"
+  },
+  "helium10": {
+    "file": "helium10.png",
+    "source": "icon.horse:helium10.com",
+    "status": "favicon",
+    "domain": "helium10.com"
+  },
+  "spyfu": {
+    "file": "spyfu.png",
+    "source": "favicon:spyfu.com",
+    "status": "favicon",
+    "domain": "spyfu.com"
+  },
+  "se-ranking": {
+    "file": "se-ranking.png",
+    "source": "icon.horse:seranking.com",
+    "status": "favicon",
+    "domain": "seranking.com"
+  },
+  "se-ranking-2": {
+    "file": "se-ranking-2.png",
+    "source": "icon.horse:seranking.com",
+    "status": "favicon",
+    "domain": "seranking.com"
+  },
+  "also-asked": {
+    "file": "also-asked.png",
+    "source": "icon.horse:alsoasked.com",
+    "status": "favicon",
+    "domain": "alsoasked.com"
+  },
+  "seo-optimer": {
+    "file": "seo-optimer.png",
+    "source": "favicon:seoptimer.com",
+    "status": "favicon",
+    "domain": "seoptimer.com"
+  },
+  "zik-analytics": {
+    "file": "zik-analytics.png",
+    "source": "icon.horse:zikanalytics.com",
+    "status": "favicon",
+    "domain": "zikanalytics.com"
+  },
+  "niche-scraper": {
+    "file": "niche-scraper.png",
+    "source": "favicon:nichescraper.com",
+    "status": "favicon",
+    "domain": "nichescraper.com"
+  },
+  "smart-scout": {
+    "file": "smart-scout.png",
+    "source": "icon.horse:smartscout.com",
+    "status": "favicon",
+    "domain": "smartscout.com"
+  },
+  "pexda": {
+    "file": "pexda.png",
+    "source": "favicon:pexda.com",
+    "status": "favicon",
+    "domain": "pexda.com"
+  },
+  "kwfinder": {
+    "file": "kwfinder.png",
+    "source": "icon.horse:kwfinder.com",
+    "status": "favicon",
+    "domain": "kwfinder.com"
+  },
+  "woorank": {
+    "file": "woorank.png",
+    "source": "icon.horse:woorank.com",
+    "status": "favicon",
+    "domain": "woorank.com"
+  },
+  "similarweb": {
+    "file": "similarweb.svg",
+    "source": "simpleicons.org/similarweb",
+    "status": "logo-svg",
+    "domain": "similarweb.com"
+  },
+  "link-indexer": {
+    "file": "link-indexer.png",
+    "source": "icon.horse:linkindexer.io",
+    "status": "favicon",
+    "domain": "linkindexer.io"
+  },
+  "answerthepublic": {
+    "file": "answerthepublic.png",
+    "source": "icon.horse:answerthepublic.com",
+    "status": "favicon",
+    "domain": "answerthepublic.com"
+  },
+  "erank": {
+    "file": "erank.png",
+    "source": "icon.horse:erank.com",
+    "status": "favicon",
+    "domain": "erank.com"
+  },
+  "ehunt": {
+    "file": "ehunt.png",
+    "source": "icon.horse:ehunt.ai",
+    "status": "favicon",
+    "domain": "ehunt.ai"
+  },
+  "keywordtool-io": {
+    "file": "keywordtool-io.png",
+    "source": "icon.horse:keywordtool.io",
+    "status": "favicon",
+    "domain": "keywordtool.io"
+  },
+  "sellthetrend": {
+    "file": "sellthetrend.png",
+    "source": "icon.horse:sellthetrend.com",
+    "status": "favicon",
+    "domain": "sellthetrend.com"
+  },
+  "seositecheckup": {
+    "file": "seositecheckup.png",
+    "source": "icon.horse:seositecheckup.com",
+    "status": "favicon",
+    "domain": "seositecheckup.com"
+  },
+  "storybase": {
+    "file": "storybase.png",
+    "source": "icon.horse:storybase.com",
+    "status": "favicon",
+    "domain": "storybase.com"
+  },
+  "g2": {
+    "file": "g2.svg",
+    "source": "simpleicons.org/g2",
+    "status": "logo-svg",
+    "domain": "g2.com"
+  },
+  "chatgpt": {
+    "file": "chatgpt.png",
+    "source": "favicon256:openai.com",
+    "status": "favicon",
+    "domain": "openai.com"
+  },
+  "jasper-ai": {
+    "file": "jasper-ai.png",
+    "source": "icon.horse:jasper.ai",
+    "status": "favicon",
+    "domain": "jasper.ai"
+  },
+  "quillbot": {
+    "file": "quillbot.png",
+    "source": "favicon:quillbot.com",
+    "status": "favicon",
+    "domain": "quillbot.com"
+  },
+  "grammarly": {
+    "file": "grammarly.svg",
+    "source": "simpleicons.org/grammarly",
+    "status": "logo-svg",
+    "domain": "grammarly.com"
+  },
+  "bypassgpt": {
+    "file": "bypassgpt.png",
+    "source": "icon.horse:bypassgpt.ai",
+    "status": "favicon",
+    "domain": "bypassgpt.ai"
+  },
+  "writehuman": {
+    "file": "writehuman.png",
+    "source": "icon.horse:writehuman.ai",
+    "status": "favicon",
+    "domain": "writehuman.ai"
+  },
+  "wordtune": {
+    "file": "wordtune.png",
+    "source": "icon.horse:wordtune.com",
+    "status": "favicon",
+    "domain": "wordtune.com"
+  },
+  "perplexity": {
+    "file": "perplexity.svg",
+    "source": "simpleicons.org/perplexity",
+    "status": "logo-svg",
+    "domain": "perplexity.ai"
+  },
+  "hix-ai": {
+    "file": "hix-ai.png",
+    "source": "icon.horse:hix.ai",
+    "status": "favicon",
+    "domain": "hix.ai"
+  },
+  "deepseek": {
+    "file": "deepseek.svg",
+    "source": "simpleicons.org/deepseek",
+    "status": "logo-svg",
+    "domain": "deepseek.com"
+  },
+  "jenni-ai": {
+    "file": "jenni-ai.png",
+    "source": "icon.horse:jenni.ai",
+    "status": "favicon",
+    "domain": "jenni.ai"
+  },
+  "stealthwriter": {
+    "file": "stealthwriter.png",
+    "source": "icon.horse:stealthwriter.ai",
+    "status": "favicon",
+    "domain": "stealthwriter.ai"
+  },
+  "turnitin-student": {
+    "file": "turnitin-student.png",
+    "source": "icon.horse:turnitin.com",
+    "status": "favicon",
+    "domain": "turnitin.com"
+  },
+  "quetext": {
+    "file": "quetext.png",
+    "source": "favicon:quetext.com",
+    "status": "favicon",
+    "domain": "quetext.com"
+  },
+  "paperpal": {
+    "file": "paperpal.png",
+    "source": "favicon:paperpal.com",
+    "status": "favicon",
+    "domain": "paperpal.com"
+  },
+  "scite-ai": {
+    "file": "scite-ai.png",
+    "source": "icon.horse:scite.ai",
+    "status": "favicon",
+    "domain": "scite.ai"
+  },
+  "wordai": {
+    "file": "wordai.png",
+    "source": "icon.horse:wordai.com",
+    "status": "favicon",
+    "domain": "wordai.com"
+  },
+  "sora": {
+    "file": "sora.png",
+    "source": "favicon256:openai.com",
+    "status": "favicon",
+    "domain": "openai.com"
+  },
+  "grok": {
+    "file": "grok.png",
+    "source": "icon.horse:x.ai",
+    "status": "favicon",
+    "domain": "x.ai"
+  },
+  "digen-ai": {
+    "file": "digen-ai.png",
+    "source": "icon.horse:digen.ai",
+    "status": "favicon",
+    "domain": "digen.ai"
+  },
+  "gemini-pro": {
+    "file": "gemini-pro.svg",
+    "source": "simpleicons.org/googlegemini",
+    "status": "logo-svg",
+    "domain": "gemini.google.com"
+  },
+  "wordhero": {
+    "file": "wordhero.png",
+    "source": "icon.horse:wordhero.co",
+    "status": "favicon",
+    "domain": "wordhero.co"
+  },
+  "you-com": {
+    "file": "you-com.png",
+    "source": "icon.horse:you.com",
+    "status": "favicon",
+    "domain": "you.com"
+  },
+  "zee": {
+    "file": "zee.png",
+    "source": "icon.horse:zee.ai",
+    "status": "favicon",
+    "domain": "zee.ai"
+  },
+  "canva": {
+    "file": "canva.png",
+    "source": "icon.horse:canva.com",
+    "status": "favicon",
+    "domain": "canva.com"
+  },
+  "freepik": {
+    "file": "freepik.svg",
+    "source": "simpleicons.org/freepik",
+    "status": "logo-svg",
+    "domain": "freepik.com"
+  },
+  "envato": {
+    "file": "envato.svg",
+    "source": "simpleicons.org/envato",
+    "status": "logo-svg",
+    "domain": "envato.com"
+  },
+  "beautiful-ai": {
+    "file": "beautiful-ai.png",
+    "source": "icon.horse:beautiful.ai",
+    "status": "favicon",
+    "domain": "beautiful.ai"
+  },
+  "flaticon": {
+    "file": "flaticon.png",
+    "source": "icon.horse:flaticon.com",
+    "status": "favicon",
+    "domain": "flaticon.com"
+  },
+  "motionarray": {
+    "file": "motionarray.png",
+    "source": "icon.horse:motionarray.com",
+    "status": "favicon",
+    "domain": "motionarray.com"
+  },
+  "epidemic-sound": {
+    "file": "epidemic-sound.png",
+    "source": "icon.horse:epidemicsound.com",
+    "status": "favicon",
+    "domain": "epidemicsound.com"
+  },
+  "rawpixel": {
+    "file": "rawpixel.png",
+    "source": "icon.horse:rawpixel.com",
+    "status": "favicon",
+    "domain": "rawpixel.com"
+  },
+  "crello-pro": {
+    "file": "crello-pro.png",
+    "source": "favicon:crello.com",
+    "status": "favicon",
+    "domain": "crello.com"
+  },
+  "placeit": {
+    "file": "placeit.png",
+    "source": "favicon:placeit.net",
+    "status": "favicon",
+    "domain": "placeit.net"
+  },
+  "capcut": {
+    "file": "capcut.png",
+    "source": "icon.horse:capcut.com",
+    "status": "favicon",
+    "domain": "capcut.com"
+  },
+  "storyblocks": {
+    "file": "storyblocks.png",
+    "source": "icon.horse:storyblocks.com",
+    "status": "favicon",
+    "domain": "storyblocks.com"
+  },
+  "leonardo": {
+    "file": "leonardo.png",
+    "source": "favicon256:leonardo.ai",
+    "status": "favicon",
+    "domain": "leonardo.ai"
+  },
+  "runwayml": {
+    "file": "runwayml.png",
+    "source": "icon.horse:runwayml.com",
+    "status": "favicon",
+    "domain": "runwayml.com"
+  },
+  "vecteezy": {
+    "file": "vecteezy.png",
+    "source": "icon.horse:vecteezy.com",
+    "status": "favicon",
+    "domain": "vecteezy.com"
+  },
+  "vectorizer": {
+    "file": "vectorizer.png",
+    "source": "icon.horse:vectorizer.ai",
+    "status": "favicon",
+    "domain": "vectorizer.ai"
+  },
+  "prezi": {
+    "file": "prezi.svg",
+    "source": "simpleicons.org/prezi",
+    "status": "logo-svg",
+    "domain": "prezi.com"
+  },
+  "design-ai": {
+    "file": "design-ai.png",
+    "source": "favicon:designs.ai",
+    "status": "favicon",
+    "domain": "designs.ai"
+  },
+  "fotoget": {
+    "file": null,
+    "source": null,
+    "status": "unavailable",
+    "domain": "fotoget.com"
+  },
+  "ideogram": {
+    "file": "ideogram.png",
+    "source": "icon.horse:ideogram.ai",
+    "status": "favicon",
+    "domain": "ideogram.ai"
+  },
+  "bookbolt": {
+    "file": "bookbolt.png",
+    "source": "icon.horse:bookbolt.io",
+    "status": "favicon",
+    "domain": "bookbolt.io"
+  },
+  "fiesta": {
+    "file": null,
+    "source": null,
+    "status": "unavailable",
+    "domain": "fiesta.ai"
+  },
+  "kapwing": {
+    "file": "kapwing.png",
+    "source": "icon.horse:kapwing.com",
+    "status": "favicon",
+    "domain": "kapwing.com"
+  },
+  "elevenlabs": {
+    "file": "elevenlabs.svg",
+    "source": "simpleicons.org/elevenlabs",
+    "status": "logo-svg",
+    "domain": "elevenlabs.io"
+  },
+  "udemy": {
+    "file": "udemy.svg",
+    "source": "simpleicons.org/udemy",
+    "status": "logo-svg",
+    "domain": "udemy.com"
+  },
+  "coursera": {
+    "file": "coursera.svg",
+    "source": "simpleicons.org/coursera",
+    "status": "logo-svg",
+    "domain": "coursera.org"
+  },
+  "skillshare": {
+    "file": "skillshare.svg",
+    "source": "simpleicons.org/skillshare",
+    "status": "logo-svg",
+    "domain": "skillshare.com"
+  },
+  "slideshare": {
+    "file": "slideshare.svg",
+    "source": "simpleicons.org/slideshare",
+    "status": "logo-svg",
+    "domain": "slideshare.net"
+  },
+  "scribd": {
+    "file": "scribd.png",
+    "source": "icon.horse:scribd.com",
+    "status": "favicon",
+    "domain": "scribd.com"
+  },
+  "everand": {
+    "file": "everand.png",
+    "source": "favicon:everand.com",
+    "status": "favicon",
+    "domain": "everand.com"
+  },
+  "alura": {
+    "file": "alura.png",
+    "source": "icon.horse:alura.com.br",
+    "status": "favicon",
+    "domain": "alura.com.br"
+  },
+  "linkedin-learning": {
+    "file": "linkedin-learning.png",
+    "source": "favicon:linkedin.com",
+    "status": "favicon",
+    "domain": "linkedin.com"
+  },
+  "netflix": {
+    "file": "netflix.svg",
+    "source": "simpleicons.org/netflix",
+    "status": "logo-svg",
+    "domain": "netflix.com"
+  },
+  "amazon-prime": {
+    "file": "amazon-prime.png",
+    "source": "icon.horse:primevideo.com",
+    "status": "favicon",
+    "domain": "primevideo.com"
+  },
+  "nord-vpn": {
+    "file": "nord-vpn.svg",
+    "source": "simpleicons.org/nordvpn",
+    "status": "logo-svg",
+    "domain": "nordvpn.com"
+  },
+  "all-in-one": {
+    "file": null,
+    "source": null,
+    "status": "unavailable",
+    "domain": null
+  },
+  "basic-plan": {
+    "file": null,
+    "source": null,
+    "status": "unavailable",
+    "domain": null
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subscriptions — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="subscriptions" data-title="Subscriptions">
+<main id="page">
+  <div class="page-head">
+    <div><h1>Subscriptions</h1><p class="sub">All plans are fixed 30-day terms — renew manually, no auto-billing.</p></div>
+    <div class="page-head-actions"><a class="btn btn-primary" href="products.html">Add a tool</a></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><span class="k">Active</span><div class="v" id="ss-active"></div><div class="s">Subscriptions running</div></div>
+    <div class="stat"><span class="k">Expiring soon</span><div class="v" id="ss-expiring"></div><div class="s">Within the next 7 days</div></div>
+    <div class="stat"><span class="k">Monthly spend</span><div class="v" id="ss-spend"></div><div class="s">If all renew this cycle</div></div>
+    <div class="stat"><span class="k">Next renewal</span><div class="v small" id="ss-next" style="font-size:15px;line-height:1.4"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Active subscriptions</div>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Tool</th><th>Status</th><th>Started</th><th>Expires</th><th>Time left</th><th class="r">Price</th><th></th></tr></thead>
+      <tbody id="sub-active"></tbody>
+    </table></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Past subscriptions</div>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Tool</th><th>Status</th><th>Started</th><th>Expired</th><th>Time left</th><th class="r">Price</th><th></th></tr></thead>
+      <tbody id="sub-past"></tbody>
+    </table></div>
+  </div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

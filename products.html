@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tool Catalogue — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="products" data-title="Tool Catalogue">
+<main id="page">
+  <div class="page-head">
+    <div><h1>Tool Catalogue</h1><p class="sub"><span id="pcount"></span> · every tool is a 30-day subscription</p></div>
+    <div class="page-head-actions"><a class="btn btn-primary" href="signup.html">Add a tool</a></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="pq" type="search" placeholder="Search tools, categories…" aria-label="Search tools"></div>
+    <select class="select" id="psort" aria-label="Sort tools">
+      <option value="name">Name A–Z</option>
+      <option value="popular">Most popular</option>
+      <option value="price-asc">Price: low to high</option>
+      <option value="price-desc">Price: high to low</option>
+    </select>
+    <span class="grow"></span>
+    <button class="chip on" data-quick="all">All</button>
+    <button class="chip" data-quick="owned">My tools</button>
+    <button class="chip" data-quick="fav">Favorites</button>
+  </div>
+
+  <div class="chip-row" id="cat-chips" style="margin-bottom:18px"></div>
+  <div class="prod-grid" id="pgrid"></div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

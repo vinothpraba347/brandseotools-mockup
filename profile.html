@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="profile" data-title="Settings">
+<main id="page">
+  <div class="page-head"><div><h1>Settings</h1><p class="sub">Manage your account, security and notification preferences.</p></div></div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab on" data-tab="profile" role="tab">Profile</button>
+    <button class="tab" data-tab="security" role="tab">Security</button>
+    <button class="tab" data-tab="notif" role="tab">Notifications</button>
+  </div>
+
+  <div data-pane="profile">
+    <div class="card" style="max-width:560px"><div class="card-pad">
+      <form id="pf-form" novalidate>
+        <div class="form-row">
+          <div class="field"><label for="pf-name">Full name <span class="req">*</span></label><input id="pf-name" type="text" value="Rahul Sharma" autocomplete="name"><div class="err">Please enter your name</div></div>
+          <div class="field"><label for="pf-user">Username</label><input id="pf-user" type="text" value="rahulsharma" disabled><div class="hint">Username can’t be changed.</div></div>
+        </div>
+        <div class="field"><label for="pf-email">Email <span class="req">*</span></label><input id="pf-email" type="email" value="rahul.sharma@example.com" autocomplete="email"><div class="err">Enter a valid email address</div></div>
+        <div class="form-row">
+          <div class="field"><label for="pf-phone">Phone (WhatsApp)</label><input id="pf-phone" type="tel" value="+91 98765 43210" autocomplete="tel"></div>
+          <div class="field"><label for="pf-tz">Timezone</label><select id="pf-tz"><option>Asia/Kolkata (IST)</option><option>Asia/Dubai (GST)</option><option>Europe/London (GMT)</option></select></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save changes</button>
+      </form>
+    </div></div>
+    <p class="xs faint" style="margin-top:10px">Member since August 2025 · ID #15046</p>
+  </div>
+
+  <div data-pane="security" style="display:none">
+    <div class="grid-2" style="align-items:start">
+      <div class="card"><div class="card-pad">
+        <h3 style="margin-bottom:14px">Change password</h3>
+        <form id="pw-form" novalidate>
+          <div class="field"><label for="pw-cur">Current password <span class="req">*</span></label><input id="pw-cur" type="password" autocomplete="current-password"><div class="err">Enter your current password (min 6 characters)</div></div>
+          <div class="field"><label for="pw-new">New password <span class="req">*</span></label><input id="pw-new" type="password" autocomplete="new-password"><div class="err">Minimum 8 characters</div></div>
+          <div class="field"><label for="pw-confirm">Confirm new password <span class="req">*</span></label><input id="pw-confirm" type="password" autocomplete="new-password"><div class="err">Passwords don’t match</div></div>
+          <button class="btn btn-primary" type="submit">Update password</button>
+        </form>
+      </div></div>
+      <div class="card"><div class="card-pad">
+        <h3 style="margin-bottom:4px">Sessions & sign-in</h3>
+        <div class="set-row"><div><b>Sign out other devices</b><p>Ends sessions everywhere except this browser.</p></div><button class="btn btn-secondary btn-sm" id="btn-revoke">Sign out others</button></div>
+        <div class="set-row"><div><b>Two-factor authentication</b><p>Not available yet — the production site doesn’t support it.</p></div><span class="badge b-neutral">Coming soon</span></div>
+        <div class="set-row" style="border-bottom:0"><div><b>This device</b><p>Chrome on Windows · signed in since today, 09:41 IST</p></div><span class="badge b-active">Current</span></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div data-pane="notif" style="display:none">
+    <div class="card" style="max-width:560px"><div class="card-pad">
+      <h3 style="margin-bottom:4px">Notification preferences</h3>
+      <div class="set-row"><div><b>Expiry reminders</b><p>Email + in-app alerts at 7 and 2 days before a subscription ends.</p></div><label class="switch"><input type="checkbox" checked data-pref><span class="sl"></span></label></div>
+      <div class="set-row"><div><b>Payment receipts</b><p>Email a copy of every invoice to your address.</p></div><label class="switch"><input type="checkbox" checked data-pref><span class="sl"></span></label></div>
+      <div class="set-row"><div><b>New tool announcements</b><p>Know when tools are added to the catalogue.</p></div><label class="switch"><input type="checkbox" checked data-pref><span class="sl"></span></label></div>
+      <div class="set-row" style="border-bottom:0"><div><b>WhatsApp alerts</b><p>Urgent expiry and access alerts over WhatsApp.</p></div><label class="switch"><input type="checkbox" data-pref><span class="sl"></span></label></div>
+    </div></div>
+  </div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="dashboard" data-title="Dashboard">
+<main id="page">
+  <div class="page-head">
+    <div><h1 id="greet">Dashboard</h1><p class="sub" id="subline"></p></div>
+    <div class="page-head-actions">
+      <a class="btn btn-secondary" href="extension.html">Install extension</a>
+      <a class="btn btn-primary" href="products.html">Browse tools</a>
+    </div>
+  </div>
+
+  <div id="alerts"></div>
+
+  <div class="stat-row">
+    <div class="stat" id="stat-active"><span class="k">Active subscriptions</span><div class="v"></div><div class="s">Products you can access now</div></div>
+    <div class="stat" id="stat-expiry"><span class="k">Next expiry</span><div class="v"></div><div class="s"></div></div>
+    <div class="stat" id="stat-spend"><span class="k">Monthly spend</span><div class="v"></div><div class="s">Across active subscriptions</div></div>
+    <div class="stat" id="stat-tools"><span class="k">Catalogue</span><div class="v"></div><div class="s">New tools added regularly</div></div>
+  </div>
+
+  <div class="grid-23">
+    <div>
+      <div class="section">
+        <div class="section-title">Your tools</div>
+        <div class="prod-grid" id="your-tools" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">Renewal schedule</div>
+        <div class="card"><div id="exp-list"></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="section">
+        <div class="section-title">Recently used</div>
+        <div class="card"><div id="recent-list"></div></div>
+      </div>
+      <div class="section" id="announcements">
+        <div class="section-title">Announcements</div>
+        <div class="card"><div id="ann-list"></div></div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

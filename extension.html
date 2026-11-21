@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install Extension — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="extension" data-title="Install Extension">
+<main id="page">
+  <div class="page-head"><div><h1>Browser Extension</h1><p class="sub">Required for most tools — it signs you into shared workspaces securely.</p></div></div>
+
+  <div class="ext-hero">
+    <span class="eic"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4zM2 7l3-4h14l3 4"/><path d="M12 11v6M9 14l3 3 3-3"/></svg></span>
+    <div>
+      <h2>BrandSeoTools Access <span class="badge b-accent" style="vertical-align:2px">v3.0.1</span></h2>
+      <p>One-click sign-in to every tool you subscribe to. No passwords to copy, no shared credentials in plain sight — the extension handles sessions for you.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="App.toast('Extension download simulated — .zip would download here')">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download extension
+        </button>
+        <button class="btn btn-secondary" id="ext-check">Check extension status</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <div class="card"><div class="card-pad">
+      <h3 style="margin-bottom:12px">Installation — 4 steps</h3>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div><b>Download and unzip</b><p>Click Download above and extract the <code>.zip</code> to a folder you’ll keep (e.g. Documents/BrandSeoTools).</p></div></div>
+        <div class="step"><span class="n">2</span><div><b>Open extensions page</b><p>In Chrome/Edge/Brave, go to <code>chrome://extensions</code> and turn on <b>Developer mode</b> (top right).</p></div></div>
+        <div class="step"><span class="n">3</span><div><b>Load unpacked</b><p>Click <b>Load unpacked</b> and select the extracted folder. The BrandSeoTools icon appears in your toolbar.</p></div></div>
+        <div class="step"><span class="n">4</span><div><b>Pin it and you’re done</b><p>Pin the extension, then open any tool page — access happens automatically from then on.</p></div></div>
+      </div>
+      <div class="howto-note">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <p>Can’t install extensions? Tools marked <b>Cloud access</b> (like CapCut) work without it — and support can enable cloud sessions for other tools on request.</p>
+      </div>
+    </div></div>
+    <div>
+      <div class="card section"><div class="card-pad">
+        <h3 style="margin-bottom:10px">Requirements</h3>
+        <ul class="req-list">
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Chrome, Edge, Brave or Arc — v110+</li>
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Windows, macOS or Linux desktop</li>
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Any active subscription</li>
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Only runs on tool pages you open from here</li>
+        </ul>
+      </div></div>
+      <div class="card"><div class="card-pad">
+        <h3 style="margin-bottom:10px">Troubleshooting</h3>
+        <ul class="req-list">
+          <li style="align-items:flex-start"><span style="min-width:0"><b class="small">Extension vanished after update?</b><br><span class="xs muted">Re-run Load unpacked — browser updates sometimes remove sideloaded extensions.</span></span></li>
+          <li style="align-items:flex-start"><span style="min-width:0"><b class="small">“Access denied” on a tool?</b><br><span class="xs muted">Check it’s under Your tools on the Dashboard and hasn’t expired.</span></span></li>
+          <li style="align-items:flex-start"><span style="min-width:0"><b class="small">Stuck on a blank page?</b><br><span class="xs muted">Sign out of the tool’s own account first — sessions can conflict.</span></span></li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>

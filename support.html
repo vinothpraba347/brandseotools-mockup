@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help & Support — BrandSeoTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="support" data-title="Help & Support">
+<main id="page">
+  <div class="page-head"><div><h1>Help & Support</h1><p class="sub">Answers to common questions, and how to reach us.</p></div></div>
+
+  <div class="contact-grid section">
+    <div class="contact-card">
+      <span class="eic"><svg class="ic ic-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+      <b>WhatsApp support</b><p>Fastest way to reach us — usually replies within an hour, 9 AM – 11 PM IST.</p>
+      <button class="btn btn-primary btn-sm" onclick="App.toast('WhatsApp chat is simulated in this prototype','info')">Open chat</button>
+    </div>
+    <div class="contact-card">
+      <span class="eic"><svg class="ic ic-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg></span>
+      <b>Email</b><p>For invoices, refunds and account changes. Replies within 24 hours.</p>
+      <button class="btn btn-secondary btn-sm" data-copy="support@brandseotool.com" onclick="navigator.clipboard.writeText('support@brandseotool.com');App.toast('Email copied')">Copy address</button>
+    </div>
+    <div class="contact-card">
+      <span class="eic"><svg class="ic ic-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></svg></span>
+      <b>Install the extension</b><p>Most “can’t access” issues are fixed by installing or updating the extension.</p>
+      <a class="btn btn-secondary btn-sm" href="extension.html">Extension guide</a>
+    </div>
+  </div>
+
+  <div class="grid-23">
+    <div>
+      <div class="toolbar">
+        <div class="search"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="fq" type="search" placeholder="Search help…" aria-label="Search help articles"></div>
+      </div>
+      <div class="chip-row" id="faq-chips" style="margin-bottom:14px"></div>
+      <div class="faq" id="faq-list"></div>
+    </div>
+    <div>
+      <div class="card"><div class="card-pad">
+        <h3 style="margin-bottom:12px">Still stuck? Message us</h3>
+        <form id="contact-form" novalidate>
+          <div class="field"><label for="cf-subject">Topic <span class="req">*</span></label>
+            <select id="cf-subject"><option value="">Choose a topic…</option><option>Can’t access a tool</option><option>Payment or invoice</option><option>Renewal question</option><option>Account & login</option><option>Something else</option></select>
+            <div class="err">Please choose a topic</div></div>
+          <div class="field"><label for="cf-msg">Message <span class="req">*</span></label><textarea id="cf-msg" placeholder="Describe the issue — include the tool name and what you tried."></textarea><div class="err">Tell us a bit more (min 10 characters)</div></div>
+          <button class="btn btn-primary btn-block" type="submit">Send message</button>
+        </form>
+      </div></div>
+    </div>
+  </div>
+</main>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/mock-data.js"></script>
+<script src="assets/js/product-images.js"></script><script src="assets/js/app.js"></script>
+</body>
+</html>
