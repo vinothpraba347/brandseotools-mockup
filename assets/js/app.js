@@ -140,12 +140,14 @@
 
     // sidebar interactions
     $('.sb-toggle', sb).addEventListener('click', function () {
+      if (window.innerWidth <= 960) { app.classList.remove('sb-open'); return; }
       app.classList.toggle('sb-collapsed');
       store('sidebar', app.classList.contains('sb-collapsed') ? 'collapsed' : 'open');
       $('.sb-toggle .ic', sb).outerHTML = icon(app.classList.contains('sb-collapsed') ? 'panel-left-open' : 'panel-left-close');
     });
     $('.tb-menu-btn', tb).addEventListener('click', function () { app.classList.toggle('sb-open'); });
     back.addEventListener('click', function () { app.classList.remove('sb-open'); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 960) app.classList.remove('sb-open'); });
     $('#sb-user-btn').addEventListener('click', function () { location.href = 'profile.html'; });
 
     // theme

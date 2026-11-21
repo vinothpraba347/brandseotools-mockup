@@ -526,6 +526,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13px}
 
 /* ---------- Mobile: never show icon-rail; drawer always full ---------- */
 @media (max-width:960px){
+  .app.sb-collapsed{grid-template-columns:minmax(0,1fr)}
   .app.sb-collapsed .sb-name{display:inline}
   .app.sb-collapsed .sb-sec{display:block}
   .app.sb-collapsed .sb-item span{display:inline}
