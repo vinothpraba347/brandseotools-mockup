@@ -121,7 +121,7 @@ Port these CSS variables verbatim into the theme. Both palettes exist — dark i
 9. **`/billing`** — toolbar (search, status select); txns table (invoice id,date,item,method,amount,status badge, Invoice btn) → invoice modal (billed-to rows + Download PDF → simulated toast); empty state.
 10. **`/settings`** — tabs Profile/Security/Notifications: profile form (name,email,phone,timezone; username disabled; validation+toast); security = change-pw form (cur/new≥8/match) + sessions card (Sign-out-others → confirm modal, 2FA "Coming soon" badge, current device); notifications = 4 switch rows → toast.
 11. **`/support`** — 3 contact cards (WhatsApp→toast, Email copy→toast, Extension guide link); left: FAQ search + cat chips + 12-question accordion; right: contact form (topic select + msg ≥10 → success toast, reset).
-12. **`/extension`** — hero card (56px accent icon tile, name + `v3.0.1` badge, desc, Download→toast, "Check extension status"→900ms spinner→"not detected" modal w/ install CTA); 2-col: 4-step install guide + blue cloud-access note; requirements checklist; troubleshooting list.
+12. **`/extension`** — hero card (56px accent icon tile, name + `v3.0.1` badge, desc, Download→toast, "Check extension status"→900ms spinner→"not detected" modal w/ install CTA); 2-col: 4-step install guide + blue cloud-access note; requirements checklist; troubleshooting list. Mobile-only (≤960px) "Desktop required" info note below the hero — hidden on desktop.
 
 ## 7. Data model (`src/data/`)
 

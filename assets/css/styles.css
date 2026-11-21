@@ -537,3 +537,10 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13px}
   .app.sb-collapsed .sb-user{justify-content:flex-start}
   .app.sb-collapsed .sb-toggle{margin-left:auto}
 }
+
+/* ---------- Extension page: mobile-only desktop-required note ---------- */
+.ext-desktop-note{display:none}
+@media (max-width:960px){
+  .ext-desktop-note{display:flex;gap:10px;padding:11px 14px;border-radius:var(--r-sm);background:var(--info-soft);color:var(--text-2);font-size:12.5px;margin-bottom:18px;align-items:flex-start}
+  .ext-desktop-note .ic{flex:none;margin-top:1px;color:var(--info)}
+}
