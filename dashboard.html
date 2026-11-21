@@ -17,12 +17,13 @@
   </div>
 
   <div id="alerts"></div>
+  <div class="setup-card" id="setup-card"></div>
 
   <div class="stat-row">
     <div class="stat" id="stat-active"><span class="k">Active subscriptions</span><div class="v"></div><div class="s">Products you can access now</div></div>
     <div class="stat" id="stat-expiry"><span class="k">Next expiry</span><div class="v"></div><div class="s"></div></div>
     <div class="stat" id="stat-spend"><span class="k">Monthly spend</span><div class="v"></div><div class="s">Across active subscriptions</div></div>
-    <div class="stat" id="stat-tools"><span class="k">Catalogue</span><div class="v"></div><div class="s">New tools added regularly</div></div>
+    <div class="stat" id="stat-tools"><span class="k">Expiring soon</span><div class="v"></div><div class="s">Within the next 7 days</div></div>
   </div>
 
   <div class="grid-23">
@@ -32,13 +33,13 @@
         <div class="prod-grid" id="your-tools" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))"></div>
       </div>
       <div class="section">
-        <div class="section-title">Renewal schedule</div>
+        <div class="section-title">Upcoming charges</div>
         <div class="card"><div id="exp-list"></div></div>
       </div>
     </div>
     <div>
       <div class="section">
-        <div class="section-title">Recently used</div>
+        <div class="section-title">Recently used <span class="grow"></span><button class="btn btn-ghost btn-sm" id="recent-clear">Clear</button></div>
         <div class="card"><div id="recent-list"></div></div>
       </div>
       <div class="section" id="announcements">

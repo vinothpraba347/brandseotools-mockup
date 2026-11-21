@@ -56,6 +56,7 @@
 
   /* ---------- modal ---------- */
   function modal(opts) {
+    var prevFocus = document.activeElement;
     var back = document.createElement('div');
     back.className = 'modal-back';
     back.innerHTML = '<div class="modal" role="dialog" aria-modal="true" aria-label="' + esc(opts.title) + '">' +
@@ -64,8 +65,22 @@
       (opts.foot ? '<div class="modal-foot">' + opts.foot + '</div>' : '') + '</div>';
     document.body.appendChild(back);
     requestAnimationFrame(function () { back.classList.add('show'); });
-    function close() { back.classList.remove('show'); setTimeout(function () { back.remove(); }, 160); document.removeEventListener('keydown', onKey); }
-    function onKey(e) { if (e.key === 'Escape') close(); }
+    function close() {
+      back.classList.remove('show');
+      setTimeout(function () { back.remove(); }, 160);
+      document.removeEventListener('keydown', onKey);
+      if (prevFocus && prevFocus.focus) prevFocus.focus();
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') { close(); return; }
+      if (e.key === 'Tab') {
+        var els = $$('button, [href], input, select, textarea', back).filter(function (x) { return x.offsetParent !== null; });
+        if (!els.length) return;
+        var first = els[0], last = els[els.length - 1];
+        if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+        else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+      }
+    }
     back.addEventListener('click', function (e) { if (e.target === back || e.target.closest('[data-close]')) close(); });
     document.addEventListener('keydown', onKey);
     var f = back.querySelector('button, [href], input, select');
@@ -93,6 +108,10 @@
     var content = $('#page');
     if (!page || !content || ['auth', 'landing', 'login', 'forgot', 'signup'].indexOf(page) > -1) return;
     document.title = (document.body.dataset.title || 'Dashboard') + ' — BrandSeoTools';
+
+    var skip = document.createElement('a');
+    skip.className = 'skip-link'; skip.href = '#page'; skip.textContent = 'Skip to main content';
+    document.body.prepend(skip);
 
     var app = document.createElement('div');
     app.className = 'app' + (store('sidebar') === 'collapsed' ? ' sb-collapsed' : '');
@@ -129,7 +148,8 @@
       '<button class="icon-btn tb-menu-btn" aria-label="Open menu">' + icon('menu') + '</button>' +
       '<span class="tb-title">' + esc(document.body.dataset.title || '') + '</span>' +
       '<div class="tb-search"><label class="sr-only" style="position:absolute;left:-9999px">Search tools</label>' + icon('search') +
-      '<input type="search" placeholder="Search tools…" id="global-search" autocomplete="off"></div>' +
+      '<input type="search" placeholder="Search tools…" id="global-search" autocomplete="off"><span class="kbd">⌘K</span><div class="sr-drop" id="sr-drop"></div></div>' +
+      '<button class="icon-btn tb-search-btn" id="tb-search-btn" aria-label="Search tools">' + icon('search') + '</button>' +
       '<div class="tb-actions">' +
       '<button class="icon-btn" id="theme-btn" aria-label="Toggle theme">' + icon('moon') + '</button>' +
       '<span class="menu-wrap"><button class="icon-btn" id="notif-btn" aria-label="Notifications">' + icon('bell') + (unread ? '<span class="dot"></span>' : '') + '</button></span>' +
@@ -181,8 +201,9 @@
       $$('.notif-item', menuEl).forEach(function (b) {
         b.addEventListener('click', function () {
           var n = M.notifications.find(function (x) { return x.id === b.dataset.nid; });
-          if (n) n.read = true; b.classList.add('read');
+          if (n) { n.read = true; b.classList.add('read'); }
           if (!M.notifications.some(function (x) { return !x.read; })) { var d = $('#notif-btn .dot'); if (d) d.remove(); }
+          if (n && n.link) location.href = n.link;
         });
       });
       $('[data-markall]', menuEl).addEventListener('click', function () {
@@ -194,15 +215,75 @@
     });
     void nBtn;
 
-    // global search → products page
-    var gs = $('#global-search');
+    // global search — live results, ⌘K/Ctrl+K, keyboard nav, mobile sheet
+    var gs = $('#global-search'), drop = $('#sr-drop');
+    var selIdx = 0;
+    function searchProducts(q) {
+      q = q.toLowerCase().trim();
+      if (!q) return [];
+      return M.products.filter(function (p) {
+        return p.name.toLowerCase().indexOf(q) > -1 || p.cat.toLowerCase().indexOf(q) > -1;
+      }).slice(0, 8);
+    }
+    function srHtml(q, list) {
+      if (!q.trim()) return '';
+      if (!list.length) return '<div class="sr-empty">No tools found for “' + esc(q) + '”</div>';
+      return list.map(function (p, i) {
+        var s = subFor(p.slug), owned = s && daysLeft(s.expires) >= 0;
+        return '<a class="sr-item' + (i === selIdx ? ' sel' : '') + '" href="product-details.html?slug=' + p.slug + '">' + picon(p) +
+          '<span class="grow"><b>' + esc(p.name) + '</b><span class="sub">' + esc(p.cat) + '</span></span>' +
+          (owned ? statusBadge(s) : '') + '<span class="sr-price">' + inr(p.price) + '</span></a>';
+      }).join('') + '<div class="sr-foot">' + list.length + ' result' + (list.length === 1 ? '' : 's') + ' — ↑↓ to move, Enter to open, Esc to close</div>';
+    }
+    function refreshDrop() {
+      var q = gs.value, list = searchProducts(q);
+      drop.innerHTML = srHtml(q, list);
+      drop.classList.toggle('open', !!q.trim());
+      return list;
+    }
+    gs.addEventListener('input', function () { selIdx = 0; refreshDrop(); });
+    gs.addEventListener('focus', function () { if (gs.value.trim()) refreshDrop(); });
     gs.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') location.href = 'products.html?q=' + encodeURIComponent(gs.value);
+      var list = searchProducts(gs.value);
+      if (e.key === 'ArrowDown' && list.length) { selIdx = Math.min(list.length - 1, selIdx + 1); refreshDrop(); e.preventDefault(); }
+      else if (e.key === 'ArrowUp' && list.length) { selIdx = Math.max(0, selIdx - 1); refreshDrop(); e.preventDefault(); }
+      else if (e.key === 'Enter') { location.href = list.length ? 'product-details.html?slug=' + list[selIdx].slug : 'products.html?q=' + encodeURIComponent(gs.value); }
+      else if (e.key === 'Escape') { drop.classList.remove('open'); gs.blur(); }
+    });
+    document.addEventListener('click', function (e) { if (!$('.tb-search').contains(e.target)) drop.classList.remove('open'); });
+    // mobile search sheet
+    $('#tb-search-btn').addEventListener('click', openSearchSheet);
+    function openSearchSheet() {
+      if ($('.sr-sheet')) { $('.sr-sheet').remove(); return; }
+      var sh = document.createElement('div');
+      sh.className = 'sr-sheet';
+      sh.innerHTML = '<div class="sr-sheet-head"><div class="search">' + icon('search') + '<input type="search" id="sh-q" placeholder="Search tools…" autocomplete="off" aria-label="Search tools"></div><button class="icon-btn" id="sh-close" aria-label="Close search">' + icon('x') + '</button></div><div class="sr-list" id="sh-list"></div>';
+      document.body.appendChild(sh);
+      var inp = $('#sh-q'); inp.focus();
+      function upd() { selIdx = 0; $('#sh-list').innerHTML = srHtml(inp.value, searchProducts(inp.value)); }
+      inp.addEventListener('input', upd);
+      inp.addEventListener('keydown', function (e) {
+        var list = searchProducts(inp.value);
+        if (e.key === 'ArrowDown' && list.length) { selIdx = Math.min(list.length - 1, selIdx + 1); upd(); e.preventDefault(); }
+        else if (e.key === 'ArrowUp' && list.length) { selIdx = Math.max(0, selIdx - 1); upd(); e.preventDefault(); }
+        else if (e.key === 'Enter' && list.length) location.href = 'product-details.html?slug=' + list[selIdx].slug;
+        else if (e.key === 'Escape') sh.remove();
+      });
+      $('#sh-close').addEventListener('click', function () { sh.remove(); });
+    }
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (window.innerWidth <= 520) openSearchSheet();
+        else { gs.focus(); gs.select(); refreshDrop(); }
+      }
     });
   }
 
   function dropdown(btnSel, items, htmlFn, after) {
     var btn = $(btnSel);
+    btn.setAttribute('aria-haspopup', 'true');
+    btn.setAttribute('aria-expanded', 'false');
     var wrap = btn.parentElement;
     var menu = document.createElement('div');
     menu.className = 'menu' + (btnSel === '#notif-btn' ? ' notif-menu' : '');
@@ -221,12 +302,13 @@
       });
     }
     var open = false;
-    function close() { open = false; menu.classList.remove('open'); }
+    function close() { open = false; menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       $$('.menu.open').forEach(function (m) { if (m !== menu) m.classList.remove('open'); });
       open = !open;
-      if (open) { render(); menu.classList.add('open'); } else close();
+      btn.setAttribute('aria-expanded', String(open));
+      if (open) { render(); menu.classList.add('open'); } else { menu.classList.remove('open'); }
     });
     document.addEventListener('click', function (e) { if (open && !wrap.contains(e.target)) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
@@ -271,6 +353,48 @@
   }
   function addDays(iso, n) { var d = new Date(iso + 'T00:00:00'); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); }
 
+  /* renew-all modal — checkbox list + running total */
+  function renewAllModal(subs) {
+    var sel = {};
+    subs.forEach(function (s) { sel[s.product] = true; });
+    var body = subs.map(function (s) {
+      var p = prod(s.product);
+      return '<label class="ren-check"><input type="checkbox" data-rslug="' + p.slug + '" checked>' + picon(p) +
+        '<span class="grow"><b>' + esc(p.name) + '</b><span class="sub"> expires ' + fmtDate(s.expires) + '</span></span><span class="r">' + inr(p.price) + '</span></label>';
+    }).join('') + '<p class="xs faint" style="margin-top:8px">Checkout is simulated — no real payment is made.</p>';
+    var m = modal({
+      title: 'Renew subscriptions', body: body,
+      foot: '<button class="btn btn-secondary" data-close>Cancel</button><button class="btn btn-primary" id="ra-pay"></button>'
+    });
+    function upd() {
+      var n = Object.keys(sel).length, t = Object.keys(sel).reduce(function (x, k) { return x + prod(k).price; }, 0);
+      $('#ra-pay', m.el).innerHTML = 'Pay ' + inr(t); $('#ra-pay', m.el).disabled = !n;
+    }
+    $$('[data-rslug]', m.el).forEach(function (cb) {
+      cb.addEventListener('change', function () { if (cb.checked) sel[cb.dataset.rslug] = true; else delete sel[cb.dataset.rslug]; upd(); });
+    });
+    upd();
+    $('#ra-pay', m.el).addEventListener('click', function () {
+      var n = Object.keys(sel).length;
+      m.close(); toast(n + ' subscription' + (n === 1 ? '' : 's') + ' renewed for 30 days (simulated)');
+    });
+  }
+
+  /* subscribe confirm modal — catalogue/detail CTAs */
+  function subscribeModal(slug) {
+    var p = prod(slug);
+    var m = modal({
+      title: 'Subscribe to ' + p.name,
+      body: '<div style="display:flex;gap:12px;align-items:center;margin-bottom:14px">' + picon(p) + '<div><b style="font-size:15px">' + esc(p.name) + '</b><div class="small muted">' + esc(p.cat) + '</div></div></div>' +
+        '<div class="kv"><span class="k">Price</span><span class="v">' + inr(p.price) + ' <span class="faint" style="font-weight:400">/ 30 days</span></span></div>' +
+        '<div class="kv"><span class="k">Billing</span><span class="v">Manual renewal — no auto-billing</span></div>' +
+        '<div class="kv"><span class="k">Access method</span><span class="v">' + (p.access === 'cloud' ? 'Cloud browser' : 'Browser extension') + '</span></div>' +
+        '<p class="small muted" style="margin-top:12px">You’ll pick a payment method on the next step. Checkout is simulated.</p>',
+      foot: '<button class="btn btn-secondary" data-close>Cancel</button><button class="btn btn-primary" id="sub-go">' + icon('shopping-cart') + 'Subscribe — ' + inr(p.price) + '</button>'
+    });
+    $('#sub-go', m.el).addEventListener('click', function () { location.href = 'signup.html?add=' + p.slug; });
+  }
+
   /* ---------- PAGE: dashboard ---------- */
   function pageDashboard() {
     var live = liveSubs();
@@ -282,20 +406,33 @@
     $('#subline').textContent = 'Here’s what’s happening with your tools today.';
 
     var wrap = $('#alerts');
-    expiring.forEach(function (s) {
-      var p = prod(s.product);
+    if (expiring.length && !store('expiry-dismissed')) {
       var a = document.createElement('div');
-      a.className = 'alert alert-warn';
-      a.innerHTML = icon('alert-triangle') + '<div class="alert-txt"><b>' + esc(p.name) + '</b> expires in <b>' + daysLeft(s.expires) + ' day' + (daysLeft(s.expires) === 1 ? '' : 's') + '</b> (' + fmtDate(s.expires) + '). Renew to keep uninterrupted access.</div><span class="alert-act"><button class="btn btn-sm" data-renew="' + p.slug + '">Renew now</button></span><button class="alert-x" aria-label="Dismiss">' + icon('x') + '</button>';
+      a.className = 'alert-strip';
+      a.innerHTML = icon('alert-triangle') + '<div class="alert-txt"><b>' + expiring.length + ' subscription' + (expiring.length === 1 ? '' : 's') + '</b> expire' + (expiring.length === 1 ? 's' : '') + ' within 7 days — renew to keep uninterrupted access.</div>' +
+        '<button class="btn btn-sm" id="exp-review">Review</button><button class="alert-x" aria-label="Dismiss">' + icon('x') + '</button>';
       wrap.appendChild(a);
-      $('.alert-x', a).addEventListener('click', function () { a.remove(); });
-    });
+      $('.alert-x', a).addEventListener('click', function () { a.remove(); store('expiry-dismissed', true); });
+      $('#exp-review', a).addEventListener('click', function () { renewAllModal(expiring); });
+    }
+
+    // onboarding checklist (dismissable, one-time)
+    var sc = $('#setup-card');
+    if (sc && !store('setup-done')) {
+      sc.innerHTML =
+        '<a class="setup-item" href="extension.html">' + icon('puzzle') + 'Install the extension — required for most tools</a>' +
+        '<a class="setup-item" href="products.html">' + icon('star') + 'Favorite the tools you use most</a>' +
+        '<a class="setup-item" href="profile.html">' + icon('bell') + 'Turn on WhatsApp expiry reminders</a>' +
+        '<button class="setup-item" id="setup-dismiss" style="border-style:dashed">' + icon('x') + 'Dismiss</button>';
+      $('#setup-dismiss', sc).addEventListener('click', function () { sc.remove(); store('setup-done', true); });
+    } else if (sc) { sc.remove(); }
 
     $('#stat-active .v').innerHTML = live.length + '<small> products</small>';
     $('#stat-expiry .v').innerHTML = next ? fmtDate(next.expires) : '—';
     $('#stat-expiry .s').textContent = next ? prod(next.product).name + ' · ' + daysLeft(next.expires) + ' days left' : 'No active subscriptions';
     $('#stat-spend .v').innerHTML = inr(spend);
-    $('#stat-tools .v').innerHTML = M.products.length + '<small> in catalogue</small>';
+    $('#stat-tools .v').innerHTML = expiring.length + '<small> tools</small>';
+    $('#stat-tools .v').style.color = expiring.length ? 'var(--warning)' : '';
 
     // your tools
     var yt = $('#your-tools');
@@ -321,11 +458,17 @@
       return '<div class="rowitem" style="align-items:flex-start"><span class="eic" style="width:30px;height:30px;border-radius:7px;background:var(--info-soft);color:var(--info);display:grid;place-items:center;flex:none">' + icon('megaphone') + '</span><div class="grow"><b>' + esc(a.title) + '</b><span class="sub" style="line-height:1.45">' + esc(a.body) + (a.link ? ' <a href="' + a.link + '">Contact support</a>' : '') + '</span></div></div>';
     }).join('');
 
-    // expiring list
-    $('#exp-list').innerHTML = live.filter(function (s) { return daysLeft(s.expires) <= 30; }).sort(function (a, b) { return a.expires < b.expires ? -1 : 1; }).slice(0, 4).map(function (s) {
+    // upcoming charges (renews the old "renewal schedule" — adds the amount column)
+    var upcoming = live.filter(function (s) { return daysLeft(s.expires) <= 30; }).sort(function (a, b) { return a.expires < b.expires ? -1 : 1; }).slice(0, 4);
+    $('#exp-list').innerHTML = upcoming.map(function (s) {
       var p = prod(s.product);
-      return '<div class="rowitem">' + picon(p) + '<div class="grow"><b>' + esc(p.name) + '</b><span class="sub">' + fmtDate(s.expires) + '</span></div>' + daysBar(s) + '</div>';
-    }).join('');
+      return '<div class="rowitem">' + picon(p) + '<div class="grow"><b>' + esc(p.name) + '</b><span class="sub">' + fmtDate(s.expires) + ' · ' + daysLeft(s.expires) + 'd left</span></div><span class="num" style="font-weight:600">' + inr(s.amount) + '</span></div>';
+    }).join('') +
+    '<div class="charge-total"><span>Due this cycle</span><span>' + inr(upcoming.reduce(function (t, s) { return t + s.amount; }, 0)) + '</span></div>';
+
+    // clear recently-used
+    var rc = $('#recent-clear');
+    if (rc) rc.addEventListener('click', function () { store('recent', []); $('#recent-list').innerHTML = '<div class="empty" style="padding:22px"><p>Nothing opened yet — tools you open appear here.</p></div>'; });
 
     document.addEventListener('click', function (e) {
       var r = e.target.closest('[data-renew]');
@@ -335,7 +478,7 @@
 
   /* ---------- PAGE: products ---------- */
   function pageProducts() {
-    var state = { q: getParam('q') || '', cat: 'All', sort: 'name', filter: 'all' };
+    var state = { q: getParam('q') || '', cat: 'All', sort: 'name', filter: 'all', price: 'all', access: 'all', view: store('view') || 'grid' };
     var qInput = $('#pq'); qInput.value = state.q;
     var cats = ['All'].concat(M.categories);
     $('#cat-chips').innerHTML = cats.map(function (c) {
@@ -359,16 +502,66 @@
     qInput.addEventListener('input', function () { state.q = qInput.value; render(); });
     $('#psort').addEventListener('change', function () { state.sort = $('#psort').value; render(); });
 
+    // grid/list toggle (persisted)
+    $$('.view-toggle [data-view]').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.view === state.view);
+      b.addEventListener('click', function () {
+        state.view = b.dataset.view; store('view', state.view);
+        $$('.view-toggle [data-view]').forEach(function (x) { x.classList.toggle('on', x === b); });
+        render();
+      });
+    });
+
+    // filter popover (price band + access type)
+    var fp = $('#filter-pop');
+    if (fp) {
+      $$('input[name=fprice]', fp).forEach(function (r) {
+        r.addEventListener('change', function () { state.price = r.value; updFilterCount(); render(); });
+      });
+      $$('input[name=faccess]', fp).forEach(function (r) {
+        r.addEventListener('change', function () { state.access = r.value; updFilterCount(); render(); });
+      });
+      var fbtn = $('#filter-btn'), fwrap = $('.filter-wrap');
+      fbtn.addEventListener('click', function (e) { e.stopPropagation(); fp.classList.toggle('open'); });
+      document.addEventListener('click', function (e) { if (fp.classList.contains('open') && !fwrap.contains(e.target)) fp.classList.remove('open'); });
+      function updFilterCount() {
+        var n = (state.price !== 'all') + (state.access !== 'all');
+        var c = $('#filter-cnt'); c.style.display = n ? '' : 'none'; c.textContent = n;
+      }
+    }
+
+    // request a tool
+    var rt = $('#req-tool');
+    if (rt) rt.addEventListener('click', function () {
+      var m = modal({
+        title: 'Request a tool',
+        body: '<div class="field"><label for="req-name">Tool or website name</label><input id="req-name" placeholder="e.g. Ahrefs, Midjourney…"><p class="hint">We review requests weekly — popular ones get added to the catalogue.</p></div>',
+        foot: '<button class="btn btn-secondary" data-close>Cancel</button><button class="btn btn-primary" id="req-send">Send request</button>'
+      });
+      $('#req-send', m.el).addEventListener('click', function () {
+        var v = $('#req-name', m.el).value.trim();
+        if (!v) { $('#req-name', m.el).closest('.field').classList.add('invalid'); return; }
+        m.close(); toast('Request sent — we review new tools weekly');
+      });
+    });
+
     function matches(p) {
       if (state.cat !== 'All' && p.cat !== state.cat) return false;
       if (state.filter === 'owned' && !(subFor(p.slug) && daysLeft(subFor(p.slug).expires) >= 0)) return false;
       if (state.filter === 'fav' && !isFav(p.slug)) return false;
-      if (state.filter === 'new') { /* popular acts as "trending" */ }
+      if (state.price === 'low' && p.price > 99) return false;
+      if (state.price === 'mid' && (p.price <= 99 || p.price > 249)) return false;
+      if (state.price === 'high' && p.price <= 249) return false;
+      if (state.access === 'cloud' && p.access !== 'cloud') return false;
+      if (state.access === 'extension' && p.access === 'cloud') return false;
       if (state.q) {
         var q = state.q.toLowerCase();
         return p.name.toLowerCase().indexOf(q) > -1 || p.cat.toLowerCase().indexOf(q) > -1 || p.desc.toLowerCase().indexOf(q) > -1;
       }
       return true;
+    }
+    function statusBits(p, sub, owned) {
+      return (owned ? statusBadge(sub) : '') + (p.access === 'cloud' ? '<span class="badge b-info">' + icon('globe') + 'Cloud</span>' : '');
     }
     function render() {
       var list = M.products.filter(matches);
@@ -379,30 +572,53 @@
         return a.name.localeCompare(b.name);
       });
       $('#pcount').textContent = list.length + ' tool' + (list.length === 1 ? '' : 's');
+      var grid = $('#pgrid');
       if (!list.length) {
-        $('#pgrid').innerHTML = '<div class="card" style="grid-column:1/-1"><div class="empty"><div class="eic">' + icon('search', 'ic-20') + '</div><h4>No tools match your search</h4><p>Try a different keyword or category filter.</p><button class="btn btn-secondary btn-sm" id="clear-f">Clear filters</button></div></div>';
+        grid.className = 'prod-grid';
+        grid.innerHTML = '<div class="card" style="grid-column:1/-1"><div class="empty"><div class="eic">' + icon('search', 'ic-20') + '</div><h4>No tools match your search</h4><p>Try a different keyword or category filter.</p><button class="btn btn-secondary btn-sm" id="clear-f">Clear filters</button></div></div>';
         $('#clear-f').addEventListener('click', function () { state.q = ''; qInput.value = ''; state.cat = 'All'; state.filter = 'all'; $$('#cat-chips .chip').forEach(function (x) { x.classList.toggle('on', x.dataset.cat === 'All'); }); $$('[data-quick]').forEach(function (x) { x.classList.toggle('on', x.dataset.quick === 'all'); }); render(); });
         return;
       }
-      $('#pgrid').innerHTML = list.map(function (p) {
-        var sub = subFor(p.slug), owned = sub && daysLeft(sub.expires) >= 0;
-        var st = owned ? statusBadge(sub) : '<span class="badge b-neutral">Not subscribed</span>';
-        return '<div class="prod">' +
-          '<div class="prod-top">' + picon(p) + '<div><div class="prod-name"><a href="product-details.html?slug=' + p.slug + '">' + esc(p.name) + '</a></div><div class="prod-cat">' + esc(p.cat) + (p.popular ? ' · <span style="color:var(--accent-text);font-weight:600">Popular</span>' : '') + '</div></div>' +
-          '<button class="prod-fav' + (isFav(p.slug) ? ' on' : '') + '" data-fav="' + p.slug + '" aria-label="Save ' + esc(p.name) + '" aria-pressed="' + isFav(p.slug) + '">' + icon('star') + '</button></div>' +
-          '<p class="prod-desc">' + esc(p.desc) + '</p>' +
-          '<div style="display:flex;align-items:center;gap:6px">' + st + (p.access === 'cloud' ? '<span class="badge b-info">' + icon('globe') + 'Cloud</span>' : '') + '</div>' +
-          '<div class="prod-foot"><span class="prod-price">' + inr(p.price) + '<span>/30d</span></span><span class="prod-cta">' +
-          (owned ? '<a class="btn btn-primary btn-sm" href="product-details.html?slug=' + p.slug + '">Access</a>'
-                 : '<a class="btn btn-secondary btn-sm" href="product-details.html?slug=' + p.slug + '">Details</a><a class="btn btn-primary btn-sm" href="signup.html?add=' + p.slug + '">Subscribe</a>') +
-          '</span></div></div>';
-      }).join('');
+      if (state.view === 'list') {
+        grid.className = 'prod-list';
+        grid.innerHTML = list.map(function (p) {
+          var sub = subFor(p.slug), owned = sub && daysLeft(sub.expires) >= 0;
+          var st = statusBits(p, sub, owned);
+          return '<div class="prod-row">' + picon(p) +
+            '<div class="grow"><a href="product-details.html?slug=' + p.slug + '">' + esc(p.name) + '</a><span class="sub">' + esc(p.cat) + (p.popular ? ' · Popular' : '') + '</span></div>' +
+            (st ? '<span style="flex:none">' + st + '</span>' : '') +
+            '<span class="prod-price">' + inr(p.price) + '<small>/30d</small></span>' +
+            '<span class="row-cta">' +
+            (owned ? '<a class="btn btn-primary btn-sm" href="product-details.html?slug=' + p.slug + '">Access</a>'
+                   : '<a class="btn btn-secondary btn-sm" href="product-details.html?slug=' + p.slug + '">Details</a><button class="btn btn-primary btn-sm" data-sub="' + p.slug + '">Subscribe</button>') +
+            '<button class="rfav' + (isFav(p.slug) ? ' on' : '') + '" data-fav="' + p.slug + '" aria-label="Save ' + esc(p.name) + '" aria-pressed="' + isFav(p.slug) + '">' + icon('star') + '</button>' +
+            '</span></div>';
+        }).join('');
+      } else {
+        grid.className = 'prod-grid';
+        grid.innerHTML = list.map(function (p) {
+          var sub = subFor(p.slug), owned = sub && daysLeft(sub.expires) >= 0;
+          var st = statusBits(p, sub, owned);
+          return '<div class="prod">' +
+            '<div class="prod-top">' + picon(p) + '<div><div class="prod-name"><a href="product-details.html?slug=' + p.slug + '">' + esc(p.name) + '</a></div><div class="prod-cat">' + esc(p.cat) + (p.popular ? ' · <span style="color:var(--accent-text);font-weight:600">Popular</span>' : '') + '</div></div>' +
+            '<button class="prod-fav' + (isFav(p.slug) ? ' on' : '') + '" data-fav="' + p.slug + '" aria-label="Save ' + esc(p.name) + '" aria-pressed="' + isFav(p.slug) + '">' + icon('star') + '</button></div>' +
+            '<p class="prod-desc">' + esc(p.desc) + '</p>' +
+            (st ? '<div style="display:flex;align-items:center;gap:6px">' + st + '</div>' : '') +
+            '<div class="prod-foot"><span class="prod-price">' + inr(p.price) + '<span>/30d</span></span><span class="prod-cta">' +
+            (owned ? '<a class="btn btn-primary btn-sm" href="product-details.html?slug=' + p.slug + '">Access</a>'
+                   : '<a class="btn btn-secondary btn-sm" href="product-details.html?slug=' + p.slug + '">Details</a><button class="btn btn-primary btn-sm" data-sub="' + p.slug + '">Subscribe</button>') +
+            '</span></div></div>';
+        }).join('');
+      }
       $$('#pgrid [data-fav]').forEach(function (b) {
         b.addEventListener('click', function () {
           var on = toggleFav(b.dataset.fav);
           b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
           toast(on ? 'Added to favorites' : 'Removed from favorites', 'info');
         });
+      });
+      $$('#pgrid [data-sub]').forEach(function (b) {
+        b.addEventListener('click', function () { subscribeModal(b.dataset.sub); });
       });
     }
     render();
@@ -465,11 +681,11 @@
       toast(on ? 'Added to favorites' : 'Removed from favorites', 'info');
     });
 
-    // related
-    var rel = M.products.filter(function (x) { return x.cat === p.cat && x.slug !== slug; }).slice(0, 3);
-    $('#pd-related').innerHTML = rel.map(function (x) {
-      return '<a class="rowitem" href="product-details.html?slug=' + x.slug + '" style="color:inherit">' + picon(x) + '<div class="grow"><b>' + esc(x.name) + '</b><span class="sub">' + inr(x.price) + '/30d</span></div>' + icon('chevron-right') + '</a>';
-    }).join('');
+    // related — compact discovery cards
+    var rel = M.products.filter(function (x) { return x.cat === p.cat && x.slug !== slug; }).slice(0, 4);
+    $('#pd-related').innerHTML = '<div class="rel-grid">' + rel.map(function (x) {
+      return '<a class="rel-card" href="product-details.html?slug=' + x.slug + '">' + picon(x) + '<span><b>' + esc(x.name) + '</b><span>' + inr(x.price) + '/30d</span></span></a>';
+    }).join('') + '</div>';
   }
 
   /* ---------- PAGE: subscriptions ---------- */
@@ -493,6 +709,30 @@
           ? '<button class="btn btn-secondary btn-sm" data-renew="' + p.slug + '">Renew</button>'
           : '<a class="btn btn-ghost btn-sm" href="product-details.html?slug=' + p.slug + '">Access</a> <button class="btn btn-secondary btn-sm" data-renew="' + p.slug + '">Renew</button>') + '</td></tr>';
     }
+    // renew-all strip when 2+ expiring within a week
+    var expiring = live.filter(function (s) { return daysLeft(s.expires) <= 7; });
+    var rb = $('#subs-banner');
+    if (rb && expiring.length >= 2) {
+      var tot = expiring.reduce(function (t, s) { return t + s.amount; }, 0);
+      rb.innerHTML = '<div class="alert-strip">' + icon('alert-triangle') + '<div class="alert-txt"><b>' + expiring.length + ' subscriptions</b> expire within 7 days — renew them together.</div><button class="btn btn-sm" id="subs-renew-all">Renew all — ' + inr(tot) + '</button></div>';
+      $('#subs-renew-all', rb).addEventListener('click', function () { renewAllModal(expiring); });
+    }
+
+    // calendar strip — next 30 days with expiry dots
+    var cs = $('#cal-strip');
+    if (cs) {
+      var byDate = {};
+      M.subscriptions.forEach(function (s) { (byDate[s.expires] = byDate[s.expires] || []).push(prod(s.product).name); });
+      var cells = '';
+      for (var i = 0; i < 30; i++) {
+        var iso = addDays('2026-11-23', i);
+        var d = new Date(iso + 'T00:00:00');
+        var ev = byDate[iso];
+        cells += '<div class="cal-d' + (ev ? ' ev' : '') + (i === 0 ? ' today' : '') + '"' + (ev ? ' title="' + esc(ev.join(', ')) + ' expires ' + fmtDate(iso) + '"' : '') + '><span class="cd">' + d.getDate() + '</span><span>' + d.toLocaleDateString('en-IN', { month: 'short' }) + '</span>' + (ev ? '<span class="cdot"></span>' : '') + '</div>';
+      }
+      cs.innerHTML = cells;
+    }
+
     $('#sub-active').innerHTML = live.sort(function (a, b) { return a.expires < b.expires ? -1 : 1; }).map(function (s) { return row(s); }).join('');
     $('#sub-past').innerHTML = dead.length
       ? dead.map(function (s) { return row(s, true); }).join('')
@@ -800,6 +1040,17 @@
     buildShell();
     var page = document.body.dataset.page;
     ({ dashboard: pageDashboard, products: pageProducts, details: pageDetails, subscriptions: pageSubscriptions, billing: pageBilling, profile: pageProfile, support: pageSupport, extension: pageExtension, login: pageLogin, forgot: pageForgot, signup: pageSignup }[page] || function () {})();
+    // landing: logo trust strip (real logos, muted → hover)
+    var ls = $('#logo-strip');
+    if (ls) {
+      var strip = ['chatgpt', 'canva', 'semrush', 'netflix', 'udemy', 'envato', 'grammarly', 'nord-vpn', 'perplexity', 'coursera'];
+      ls.innerHTML = strip.map(function (slug) {
+        var im = (window.PROD_IMAGES || {})[slug];
+        if (!im || !im.file) return '';
+        var p = prod(slug);
+        return '<a href="signup.html?add=' + slug + '" title="' + esc(p ? p.name : slug) + '"><img src="assets/images/products/' + im.file + '" alt="' + esc(p ? p.name : slug) + '" loading="lazy"></a>';
+      }).join('');
+    }
     // landing: swap static initial tiles for brand logos where mapped
     $$('.land-tool').forEach(function (a) {
       var slug = (a.getAttribute('href') || '').split('add=')[1];

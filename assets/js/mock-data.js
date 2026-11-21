@@ -123,11 +123,11 @@ window.MOCK = {
     { id: 'INV-2201', date: '2026-07-23', item: 'Grammarly — 30 days', method: 'PayPal',   amount: 99,  status: 'refunded'  }
   ],
   notifications: [
-    { id: 'n1', type: 'expiry',       title: 'Canva expires in 2 days',        body: 'Renew before 25 Nov to keep uninterrupted access.',         time: '2h ago', read: false },
-    { id: 'n2', type: 'expiry',       title: 'Semrush expires in 5 days',       body: 'Your SEO suite access ends 28 Nov.',                        time: '1d ago', read: false },
-    { id: 'n3', type: 'announcement', title: 'New tools added',                 body: 'Gemini Pro, WordHero and zee are now in the catalogue.',     time: '3d ago', read: false },
-    { id: 'n4', type: 'payment',      title: 'Invoice INV-2419 is ready',       body: 'Your receipt for the Udemy renewal is available.',          time: '3d ago', read: true  },
-    { id: 'n5', type: 'system',       title: 'Extension update available',      body: 'Version 3.0.1 fixes access issues on Udemy.',               time: '5d ago', read: true  }
+    { id: 'n1', type: 'expiry',       title: 'Canva expires in 2 days',        body: 'Renew before 25 Nov to keep uninterrupted access.',         time: '2h ago', read: false, link: 'product-details.html?slug=canva' },
+    { id: 'n2', type: 'expiry',       title: 'Semrush expires in 5 days',       body: 'Your SEO suite access ends 28 Nov.',                        time: '1d ago', read: false, link: 'product-details.html?slug=semrush' },
+    { id: 'n3', type: 'announcement', title: 'New tools added',                 body: 'Gemini Pro, WordHero and zee are now in the catalogue.',     time: '3d ago', read: false, link: 'products.html' },
+    { id: 'n4', type: 'payment',      title: 'Invoice INV-2419 is ready',       body: 'Your receipt for the Udemy renewal is available.',          time: '3d ago', read: true,  link: 'billing.html' },
+    { id: 'n5', type: 'system',       title: 'Extension update available',      body: 'Version 3.0.1 fixes access issues on Udemy.',               time: '5d ago', read: true,  link: 'extension.html' }
   ],
   announcements: [
     { id: 'a1', title: 'Monthly subscriptions only', body: 'All plans are 30 days. Anyone selling longer terms is not affiliated with us — always verify your expiry date on this page.' },

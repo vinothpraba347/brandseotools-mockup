@@ -10,7 +10,7 @@
 <main id="page">
   <div class="page-head">
     <div><h1>Tool Catalogue</h1><p class="sub"><span id="pcount"></span> · every tool is a 30-day subscription</p></div>
-    <div class="page-head-actions"><a class="btn btn-primary" href="signup.html">Add a tool</a></div>
+    <div class="page-head-actions"><button class="btn btn-secondary" id="req-tool">Request a tool</button></div>
   </div>
 
   <div class="toolbar">
@@ -22,6 +22,24 @@
       <option value="price-desc">Price: high to low</option>
     </select>
     <span class="grow"></span>
+    <span class="filter-wrap">
+      <button class="chip" id="filter-btn" aria-expanded="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M2 5h20"/><path d="M6 12h12"/><path d="M9 19h6"/></svg>Filters<span class="cnt" id="filter-cnt" style="display:none"></span></button>
+      <div class="filter-pop" id="filter-pop">
+        <h5>Price</h5>
+        <label><input type="radio" name="fprice" value="all" checked>All prices</label>
+        <label><input type="radio" name="fprice" value="low">Under ₹100</label>
+        <label><input type="radio" name="fprice" value="mid">₹100 – ₹249</label>
+        <label><input type="radio" name="fprice" value="high">₹250+</label>
+        <h5>Access</h5>
+        <label><input type="radio" name="faccess" value="all" checked>Any method</label>
+        <label><input type="radio" name="faccess" value="extension">Extension</label>
+        <label><input type="radio" name="faccess" value="cloud">Cloud only</label>
+      </div>
+    </span>
+    <span class="view-toggle" role="group" aria-label="View">
+      <button data-view="grid" class="on" aria-label="Grid view"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></button>
+      <button data-view="list" aria-label="List view"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </span>
     <button class="chip on" data-quick="all">All</button>
     <button class="chip" data-quick="owned">My tools</button>
     <button class="chip" data-quick="fav">Favorites</button>
