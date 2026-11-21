@@ -543,6 +543,9 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13px}
 @media (max-width:960px){
   .ext-desktop-note{display:flex;gap:10px;padding:11px 14px;border-radius:var(--r-sm);background:var(--info-soft);color:var(--text-2);font-size:12.5px;margin-bottom:18px;align-items:flex-start}
   .ext-desktop-note .ic{flex:none;margin-top:1px;color:var(--info)}
+  .ext-m-row{display:flex;gap:8px;margin-top:8px;line-height:1.5}
+  .ext-m-tag{flex:none;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:0 6px;font-size:10.5px;height:fit-content;line-height:17px;color:var(--text-2)}
+  .ext-m-row code{font-size:11px;background:var(--surface-2);padding:0 4px;border-radius:3px}
 }
 
 /* ---------- Landing nav on small screens ---------- */
