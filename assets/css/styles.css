@@ -523,3 +523,16 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13px}
 .picon{position:relative;overflow:hidden}
 .picon img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:5px;background:#fff;border-radius:inherit}
 .picon-img{border:1px solid var(--border)}
+
+/* ---------- Mobile: never show icon-rail; drawer always full ---------- */
+@media (max-width:960px){
+  .app.sb-collapsed .sb-name{display:inline}
+  .app.sb-collapsed .sb-sec{display:block}
+  .app.sb-collapsed .sb-item span{display:inline}
+  .app.sb-collapsed .sb-item .sb-badge{display:inline-block}
+  .app.sb-collapsed .sb-user-meta{display:block}
+  .app.sb-collapsed .sb-item{justify-content:flex-start;padding:0 8px}
+  .app.sb-collapsed .sb-brand{justify-content:flex-start;padding:0 16px}
+  .app.sb-collapsed .sb-user{justify-content:flex-start}
+  .app.sb-collapsed .sb-toggle{margin-left:auto}
+}

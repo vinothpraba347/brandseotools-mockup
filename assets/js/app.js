@@ -149,13 +149,13 @@
     $('#sb-user-btn').addEventListener('click', function () { location.href = 'profile.html'; });
 
     // theme
-    if (store('theme') === 'dark') { document.documentElement.classList.add('dark'); }
+    if (store('theme') !== 'light') { document.documentElement.classList.add('dark'); }
     $('#theme-btn').addEventListener('click', function () {
       var d = document.documentElement.classList.toggle('dark');
       store('theme', d ? 'dark' : 'light');
       $('#theme-btn').innerHTML = icon(d ? 'sun' : 'moon');
     });
-    if (store('theme') === 'dark') $('#theme-btn').innerHTML = icon('sun');
+    if (store('theme') !== 'light') $('#theme-btn').innerHTML = icon('sun');
 
     // user menu
     dropdown('#user-btn', [
@@ -477,7 +477,7 @@
     $('#ss-expiring').textContent = live.filter(function (s) { return daysLeft(s.expires) <= 7; }).length;
     $('#ss-spend').textContent = inr(live.reduce(function (t, s) { return t + s.amount; }, 0));
     var next = live.slice().sort(function (a, b) { return a.expires < b.expires ? -1 : 1; })[0];
-    $('#ss-next').textContent = next ? prod(next.product).name + ' · ' + fmtDate(next.expires) : '—';
+    $('#ss-next').innerHTML = next ? prod(next.product).name + '<small>' + fmtDate(next.expires) + '</small>' : '—';
 
     function row(s, isPast) {
       var p = prod(s.product), st = subStatus(s);
@@ -794,7 +794,7 @@
 
   /* ---------- boot ---------- */
   document.addEventListener('DOMContentLoaded', function () {
-    if (store('theme') === 'dark') document.documentElement.classList.add('dark');
+    if (store('theme') !== 'light') document.documentElement.classList.add('dark');
     buildShell();
     var page = document.body.dataset.page;
     ({ dashboard: pageDashboard, products: pageProducts, details: pageDetails, subscriptions: pageSubscriptions, billing: pageBilling, profile: pageProfile, support: pageSupport, extension: pageExtension, login: pageLogin, forgot: pageForgot, signup: pageSignup }[page] || function () {})();
